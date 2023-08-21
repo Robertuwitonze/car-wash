@@ -22,8 +22,8 @@ if (isset($_POST['pay'])) {
 {
   "telephoneNumber" : "' . $phone . '",
   "amount" : "' . $amount . '",
-  "organizationId" : "9635525e-00c5-47ce-b4ae-463ebb0a3df7",
-  "description" : "Payment for Printing services",
+  "organizationId" : "951486e5-491c-4862-b8f7-a6d82fca10af",
+  "description" : "Payment for Car wash",
   "callbackUrl" : "",
   "transactionId" : "03c1e56b-' . $random . 'b-4cf5-a949-7521072ts0gsf"
 }',
@@ -45,14 +45,14 @@ if (isset($_POST['pay'])) {
             // $transactionno = $_POST['transactionno'];
             // $message = $_POST['message'];
 
-            $sql = "update  tblcarwashbooking set paymentStatus='payed',paymentMode=:pmade where bookingId=:bookingid";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':pmade', $pmade, PDO::PARAM_STR);
-            $query->bindParam(':bookingid', $bookingid, PDO::PARAM_STR);
-            $query->execute();
+            // $sql = "update  tblcarwashbooking set paymentStatus='payed',paymentMode=:pmade where bookingId=:bookingid";
+            // $query = $dbh->prepare($sql);
+            // $query->bindParam(':pmade', $pmade, PDO::PARAM_STR);
+            // $query->bindParam(':bookingid', $bookingid, PDO::PARAM_STR);
+            // $query->execute();
             echo '<script>alert("Please continue by allowing the payment on the phone. If the prompt fails to come out dial *182*7*1#");</script>';
 
-            echo '<script>window.location="completed-booking.php";</script>';
+            // echo '<script>window.location="completed-booking.php";</script>';
 
 
             exit();

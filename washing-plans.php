@@ -115,39 +115,23 @@ if (isset($_POST['book'])) {
                 <h2>Choose Your Plan</h2>
             </div>
             <div class="row">
+                <!-- start test cards -->
+
+             
                 <div class="col-md-4">
                     <div class="price-item">
                         <div class="price-header">
-                            <h3>Basic Cleaning</h3>
-                            <h2><span>RWF</span><strong>10000</strong><span></span></h2>
+                            
+                            <img src="img/car.png" alt="" width="70" height="70">
                         </div>
                         <div class="price-body">
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Window Wiping</li>
-                            </ul>
-                        </div>
-                        <div class="price-footer">
-                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="price-item featured-item">
-                        <div class="price-header">
-                            <h3>Premium Cleaning</h3>
-                            <h2><span>RWF</span><strong>15000</strong><span></span></h2>
-                        </div>
-                        <div class="price-body">
-                            <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Window Wiping</li>
+                                <li>Imadoka Ntoya Koza Bisanzwe ..............3000RW</li>
+                                <li>Imadoka Ntoya Koza N'imashini ............4000RW </li>
+                                <li>Imadoka Ntoya Koza na moteri .............5000RW</li>
+                                <li>Imadoka Ntoya General wash ...............12000RW</li>
+                              
+
                             </ul>
                         </div>
                         <div class="price-footer">
@@ -158,16 +142,17 @@ if (isset($_POST['book'])) {
                 <div class="col-md-4">
                     <div class="price-item">
                         <div class="price-header">
-                            <h3>Complex Cleaning</h3>
-                            <h2><span>RWF</span><strong>20000</strong><span></span></h2>
+                            
+                            <img src="img/jeep.png" alt="" width="70" height="70">
                         </div>
                         <div class="price-body">
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Window Wiping</li>
+                                <li>(MIN JEEP) Koza Bisanzwe ..............3500RW</li>
+                                <li>(MIN JEEP) Koza N'imashini ............4500RW </li>
+                                <li>(MIN JEEP) Koza na moteri .............5500RW</li>
+                                <li>(MIN JEEP) General wash ...............15000RW</li>
+                              
+
                             </ul>
                         </div>
                         <div class="price-footer">
@@ -175,6 +160,158 @@ if (isset($_POST['book'])) {
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/bus.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>MinBus (Coaster) Koza Bisanzwe ..............5000RW</li>
+                                <li>MinBus (Coaster) Koza N'imashini ............5000RW </li>
+                                <li>MinBus (Coaster) Koza na moteri .............6000RW</li>
+                                <li>MinBus (Coaster) General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/van.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>Van (Hiace) Koza Bisanzwe ..............4000RW</li>
+                                <li>Van (Hiace) Koza N'imashini ............5000RW </li>
+                                <li>Van (Hiace) Koza na moteri .............6000RW</li>
+                                <li>Van (Hiace) General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/pickup.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>Ick Up (D/C) Koza Bisanzwe ..............4000RW</li>
+                                <li>Ick Up (D/C) Koza N'imashini ............5000RW </li>
+                                <li>Ick Up (D/C) Koza na moteri .............6000RW</li>
+                                <li>Ick Up (D/C) General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/lorry.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>Small Truck (Dyna) Koza Bisanzwe ..............7000RW</li>
+                                <li>Small Truck (Dyna) Koza N'imashini ............8000RW </li>
+                            
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/suv.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>SUV(Jeep) Koza Bisanzwe ..............4000RW</li>
+                                <li>SUV(Jeep) Koza N'imashini ............5000RW </li>
+                                <li>SUV(Jeep) Koza na moteri .............6000RW</li>
+                                <li>SUV(Jeep) General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/pickup.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>Pick Up(S/C) Koza Bisanzwe ..............3000RW</li>
+                                <li>Pick Up(S/C) Koza N'imashini ............4000RW </li>
+                                <li>Pick Up(S/C) Koza na moteri .............5000RW</li>
+                                <li>Pick Up(S/C) General wash ...............12000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/mini-van.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>MIN VAN Koza Bisanzwe ..............3000RW</li>
+                                <li>MIN VAN Koza N'imashini ............4000RW </li>
+                                <li>MIN VAN Koza na moteri .............5000RW</li>
+                                <li>MIN VAN General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- end test cards -->
+                
+                
             </div>
         </div>
     </div>

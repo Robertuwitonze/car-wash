@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2023 at 05:29 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Aug 12, 2023 at 05:33 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,14 +32,14 @@ CREATE TABLE `admin` (
   `UserName` varchar(100) DEFAULT NULL,
   `Password` varchar(100) DEFAULT NULL,
   `updationDate` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`) VALUES
-(1, 'admin', '202cb962ac59075b964b07152d234b70', '2020-12-10 11:18:49');
+(1, '123', '123', '2020-12-10 11:18:49');
 
 -- --------------------------------------------------------
 
@@ -53,26 +53,26 @@ CREATE TABLE `tblcarwashbooking` (
   `packageType` varchar(120) DEFAULT NULL,
   `carWashPoint` int(11) DEFAULT NULL,
   `fullName` varchar(150) DEFAULT NULL,
-  `mobileNumber` bigint(12) DEFAULT NULL,
+  `mobileNumber` varchar(20) DEFAULT NULL,
   `washDate` date DEFAULT NULL,
   `washTime` time DEFAULT NULL,
   `message` mediumtext DEFAULT NULL,
   `status` varchar(120) DEFAULT NULL,
   `adminRemark` mediumtext DEFAULT NULL,
+  `paymentStatus` varchar(120) NOT NULL DEFAULT 'not payed',
   `paymentMode` varchar(120) DEFAULT NULL,
-  `txnNumber` varchar(120) DEFAULT NULL,
   `postingDate` timestamp NULL DEFAULT current_timestamp(),
   `lastUpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblcarwashbooking`
 --
 
-INSERT INTO `tblcarwashbooking` (`id`, `bookingId`, `packageType`, `carWashPoint`, `fullName`, `mobileNumber`, `washDate`, `washTime`, `message`, `status`, `adminRemark`, `paymentMode`, `txnNumber`, `postingDate`, `lastUpdationDate`) VALUES
-(8, 767952395, '1', 3, 'root', 781352115, '2023-04-08', '08:00:00', '', 'New', NULL, NULL, NULL, '2023-04-08 09:42:14', NULL),
-(9, 665370784, '1', 3, 'root', 781352115, '2023-04-08', '08:00:00', '', 'New', NULL, NULL, NULL, '2023-04-08 09:42:58', NULL),
-(11, 401452693, '1', 3, 'root', 781352115, '2023-04-08', '01:47:00', '', 'New', NULL, NULL, NULL, '2023-04-08 11:47:59', NULL);
+INSERT INTO `tblcarwashbooking` (`id`, `bookingId`, `packageType`, `carWashPoint`, `fullName`, `mobileNumber`, `washDate`, `washTime`, `message`, `status`, `adminRemark`, `paymentStatus`, `paymentMode`, `postingDate`, `lastUpdationDate`) VALUES
+(9, 665370784, '1', 3, 'root', '781352115', '2023-04-08', '08:00:00', '', 'Completed', 'done', 'payed', 'mobile', '2023-04-08 09:42:58', '2023-04-15 12:40:21'),
+(11, 401452693, '1', 3, 'root', '781352115', '2023-04-08', '01:47:00', '', 'Completed', 'done', 'not payed', '', '2023-04-08 11:47:59', '2023-04-15 12:44:33'),
+(12, 543613108, '2', 1, 'root', '0781352115', '2023-07-01', '15:34:00', '', 'New', NULL, 'not payed', NULL, '2023-07-01 11:33:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,7 +89,7 @@ CREATE TABLE `tblenquiry` (
   `carwash` varchar(20) NOT NULL,
   `PostingDate` timestamp NULL DEFAULT current_timestamp(),
   `Status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblenquiry`
@@ -99,7 +99,9 @@ INSERT INTO `tblenquiry` (`id`, `FullName`, `EmailId`, `Subject`, `Description`,
 (4, 'Anuj kumar', 'anuj@gmail.com', 'General Enquiry', 'I want to know the price of car wash', '', '2021-12-13 18:27:53', 1),
 (5, 'Amit', 'amit@gmail.com', 'Test', 'Test', '', '2021-12-14 19:14:22', 1),
 (6, 'nuru', 'nuru@mail.com', 'repairing', 'helloe there', '', '2023-04-03 08:09:42', 1),
-(7, 'man', 'admin@gmail.com', 'meating', 'hhh', '3', '2023-04-06 14:09:03', 1);
+(7, 'man', 'admin@gmail.com', 'meating', 'hhh', '3', '2023-04-06 14:09:03', 1),
+(8, 'teacher', 'admin@gmail.com', 'meating', 'sdfghjk', '3', '2023-07-01 12:09:09', NULL),
+(9, 'teacher', 'alaska@gmail.com', 'repairing', 'dfghjk', '1', '2023-07-01 12:09:53', 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,7 @@ CREATE TABLE `tblpages` (
   `openignHrs` varchar(255) DEFAULT NULL,
   `phoneNumber` bigint(20) DEFAULT NULL,
   `emailId` varchar(120) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblpages`
@@ -134,7 +136,7 @@ CREATE TABLE `tblprice` (
   `id` int(10) NOT NULL,
   `service` varchar(200) NOT NULL,
   `cost` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblprice`
@@ -160,14 +162,15 @@ CREATE TABLE `tblusers` (
   `carwash` varchar(50) NOT NULL,
   `is_active` int(6) NOT NULL DEFAULT 1,
   `created_on` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblusers`
 --
 
 INSERT INTO `tblusers` (`id`, `names`, `username`, `password`, `email`, `carwash`, `is_active`, `created_on`) VALUES
-(3, 'man martin', 'new class', '202cb962ac59075b964b07152d234b70', 'new@gmail.com', '3', 1, '2023-04-06');
+(3, 'man martin', 'new class', '123', 'new@gmail.com', '3', 1, '2023-04-06'),
+(4, 'MUHIRE  eric', 'hoff', '123', 'hoff@gmail.com', '1', 1, '2023-07-01');
 
 -- --------------------------------------------------------
 
@@ -183,7 +186,7 @@ CREATE TABLE `tblwashingpoints` (
   `capacity` int(5) NOT NULL,
   `is_active` int(6) NOT NULL DEFAULT 1,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblwashingpoints`
@@ -191,7 +194,8 @@ CREATE TABLE `tblwashingpoints` (
 
 INSERT INTO `tblwashingpoints` (`id`, `washingPointName`, `washingPointAddress`, `contactNumber`, `capacity`, `is_active`, `creationDate`) VALUES
 (1, 'Hoffman\'s Car Wash Kigali', 'Hoffman\'s Car Wash Kigali, 24V4+23J, Kigali', '0732 323 301', 5, 1, '2023-04-03 16:21:20'),
-(3, 'New Class Car Wash', 'New Class Car Wash, ST 117, 34 KG 18 Ave, Gisimenti', '0788 506 368', 2, 1, '2023-04-03 16:24:28');
+(3, 'New Class Car Wash', 'New Class Car Wash, ST 117, 34 KG 18 Ave, Gisimenti', '0788 506 368', 2, 1, '2023-04-03 16:24:28'),
+(6, 'test', 'test', '0781352115', 2, 1, '2023-07-16 15:20:29');
 
 --
 -- Indexes for dumped tables
@@ -254,13 +258,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `tblcarwashbooking`
 --
 ALTER TABLE `tblcarwashbooking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tblenquiry`
 --
 ALTER TABLE `tblenquiry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tblpages`
@@ -278,13 +282,13 @@ ALTER TABLE `tblprice`
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblwashingpoints`
 --
 ALTER TABLE `tblwashingpoints`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

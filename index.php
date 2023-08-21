@@ -137,7 +137,7 @@ if (isset($_POST['book'])) {
 
 
     <!-- Service Start -->
-    <div class="service">
+    <!-- <div class="service">
         <div class="container">
             <div class="section-header text-center">
                 <p>What We Do?</p>
@@ -194,7 +194,7 @@ if (isset($_POST['book'])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Service End -->
 
 
@@ -209,39 +209,21 @@ if (isset($_POST['book'])) {
                 <h2>Choose Your Plan</h2>
             </div>
             <div class="row">
-                <div class="col-md-4">
+               
+              <div class="col-md-4">
                     <div class="price-item">
                         <div class="price-header">
-                            <h3>Basic Cleaning</h3>
-                            <h2><span>RWF</span><strong>10000</strong></h2>
+                            
+                            <img src="img/car.png" alt="" width="70" height="70">
                         </div>
                         <div class="price-body">
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Window Wiping</li>
-                            </ul>
-                        </div>
-                        <div class="price-footer">
-                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="price-item featured-item">
-                        <div class="price-header">
-                            <h3>Premium Cleaning</h3>
-                            <h2><span>RWF</span><strong>15000</strong></h2>
-                        </div>
-                        <div class="price-body">
-                            <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-times-circle"></i>Window Wiping</li>
+                                <li>Imadoka Ntoya Koza Bisanzwe ..............3000RW</li>
+                                <li>Imadoka Ntoya Koza N'imashini ............4000RW </li>
+                                <li>Imadoka Ntoya Koza na moteri .............5000RW</li>
+                                <li>Imadoka Ntoya General wash ...............12000RW</li>
+                              
+
                             </ul>
                         </div>
                         <div class="price-footer">
@@ -252,16 +234,17 @@ if (isset($_POST['book'])) {
                 <div class="col-md-4">
                     <div class="price-item">
                         <div class="price-header">
-                            <h3>Complex Cleaning</h3>
-                            <h2><span>RWF</span><strong>20000</strong></h2>
+                            
+                            <img src="img/jeep.png" alt="" width="70" height="70">
                         </div>
                         <div class="price-body">
                             <ul>
-                                <li><i class="far fa-check-circle"></i>Seats Washing</li>
-                                <li><i class="far fa-check-circle"></i>Vacuum Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Exterior Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Interior Wet Cleaning</li>
-                                <li><i class="far fa-check-circle"></i>Window Wiping</li>
+                                <li>(MIN JEEP) Koza Bisanzwe ..............3500RW</li>
+                                <li>(MIN JEEP) Koza N'imashini ............4500RW </li>
+                                <li>(MIN JEEP) Koza na moteri .............5500RW</li>
+                                <li>(MIN JEEP) General wash ...............15000RW</li>
+                              
+
                             </ul>
                         </div>
                         <div class="price-footer">
@@ -269,6 +252,28 @@ if (isset($_POST['book'])) {
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="price-item">
+                        <div class="price-header">
+                            
+                            <img src="img/bus.png" alt="" width="70" height="70">
+                        </div>
+                        <div class="price-body">
+                            <ul>
+                                <li>MinBus (Coaster) Koza Bisanzwe ..............5000RW</li>
+                                <li>MinBus (Coaster) Koza N'imashini ............5000RW </li>
+                                <li>MinBus (Coaster) Koza na moteri .............6000RW</li>
+                                <li>MinBus (Coaster) General wash ...............15000RW</li>
+                              
+
+                            </ul>
+                        </div>
+                        <div class="price-footer">
+                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -299,7 +304,7 @@ if (isset($_POST['book'])) {
                                 $pricequery->execute();
                                 $priceresults = $pricequery->fetchAll(PDO::FETCH_OBJ);
                                 foreach ($priceresults as $priceresult) {               ?>
-                                    <option value="<?php echo htmlentities($priceresult->id); ?>"><?php echo htmlentities($priceresult->service); ?> (<?php echo htmlentities($priceresult->cost); ?>)</option>
+                                    <option value="<?php echo htmlentities($priceresult->id); ?>"><?php echo htmlentities($priceresult->service); ?> (<b><?php echo htmlentities($priceresult->cost); ?></b>)</option>
                                 <?php } ?>
                             </select>
 

@@ -72,7 +72,7 @@
 
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
+                            <a href="index.php" class="nav-item nav-link ">Home</a>
                             <a href="about.php" class="nav-item nav-link">About</a>
                             <a href="washing-plans.php" class="nav-item nav-link">Washing Plans</a>
                             <a href="location.php" class="nav-item nav-link">Washing Points</a>
