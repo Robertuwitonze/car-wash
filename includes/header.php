@@ -78,7 +78,8 @@
                             <a href="location.php" class="nav-item nav-link">Washing Points</a>
 
                             <a href="contact.php" class="nav-item nav-link">Contact</a>
-                            <a href="admin" class="nav-item nav-link">admin</a>
+                            <a href="clients" class="nav-item nav-link">Clients</a>
+                            <a href="admin" class="nav-item nav-link">Admins</a>
                         </div>
                         <div class="ml-auto">
                             <a class="btn btn-custom" href="contact.php">Send Message</a>

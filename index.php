@@ -227,7 +227,7 @@ if (isset($_POST['book'])) {
                             </ul>
                         </div>
                         <div class="price-footer">
-                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                            <a href="clients/" class="btn btn-custom" data-toggle="##modal" data-target="##myModal">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -248,7 +248,7 @@ if (isset($_POST['book'])) {
                             </ul>
                         </div>
                         <div class="price-footer">
-                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        <a href="clients/" class="btn btn-custom" data-toggle="##modal" data-target="##myModal">Book Now</a>
                         </div>
                     </div>
                 </div>
@@ -269,7 +269,7 @@ if (isset($_POST['book'])) {
                             </ul>
                         </div>
                         <div class="price-footer">
-                            <a class="btn btn-custom" data-toggle="modal" data-target="#myModal">Book Now</a>
+                        <a href="clients/" class="btn btn-custom" data-toggle="##modal" data-target="##myModal">Book Now</a>
                         </div>
                     </div>
                 </div>
