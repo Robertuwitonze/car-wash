@@ -167,7 +167,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 
                                                <td>
 												<input type="button" name="cancle" class="btn btn-danger" value="Cancle"> |
-												<a><input type="button" class="btn btn-primary" value="Edit">
+												<a href="edit-booking.php?bid=<?=$result->bookingId;?>"><input type="button" class="btn btn-primary" value="Edit">
 											</a>
 											</td>
 											<?php } ?>
