@@ -7,7 +7,43 @@ if (strlen($_SESSION['alogin']) == 0) {
 } else {
 
 
+if(!empty($_GET['bid']) && $_GET['action'] == 'cancel')
+{
 
+	$sql = "UPDATE tblcarwashbooking SET status = 'canceled' where user_id='$_SESSION[id]' and bookingId='$_GET[bid]'";
+	$query = $dbh->prepare($sql);
+	if($query->execute())
+	{
+		// pass
+		echo "<script>alert('Booking cancled.');</script>";
+		echo "<script type='text/javascript'> document.location = 'all-bookings.php'; </script>";
+	}
+	else
+	{
+		// pass
+		echo "<script>alert('something went wrong, try again!');</script>";
+	}	
+	
+}
+// delete
+if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
+{
+
+	$sql = "DELETE from tblcarwashbooking  where user_id='$_SESSION[id]' and bookingId='$_GET[bid]'";
+	$query = $dbh->prepare($sql);
+	if($query->execute())
+	{
+		// pass
+		echo "<script>alert('Booking Deleted.');</script>";
+		echo "<script type='text/javascript'> document.location = 'all-bookings.php'; </script>";
+	}
+	else
+	{
+		// pass
+		echo "<script>alert('something went wrong, try again!');</script>";
+	}	
+	
+}
 
 
 
@@ -130,7 +166,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 								<tbody>
 									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
 									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
-									where tblcarwashbooking.user_id='$_SESSION[id]'";
+									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='NEW'";
 									$query = $dbh->prepare($sql);
 									$query->execute();
 									$results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -166,9 +202,11 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
                                                <td>
-												<input type="button" name="cancle" class="btn btn-danger" value="Cancle"> |
-												<a href="edit-booking.php?bid=<?=$result->bookingId;?>"><input type="button" class="btn btn-primary" value="Edit">
-											</a>
+											   <a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=cancel">
+											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel"> 
+												</a>
+												<!-- <a href="edit-booking.php?bid=<?=$result->bookingId;?>&action=cancel"><input type="button" class="btn btn-primary" value="Edit"></a> -->
+											
 											</td>
 											<?php } ?>
 											</tr>
@@ -185,6 +223,91 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 
 					</div>
+
+
+
+
+					<!-- CANCeLED BOOKINGS  -->
+
+					<div class="agile-tables">
+						<div class="w3l-table-info">
+							<h2>Cancled Bookings</h2>
+							<table id="example1" class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th style="color:black;">Booking No.</th>
+										<th style="color:black;">Name</th>
+										<th style="color:black;" width="200">Pacakge Type</th>
+										<th style="color:black;">Washing Point </th>
+										<th style="color:black;">Washing Date/Time </th>
+										<th style="color:black;" width="200">Status </th>
+										<th style="color:black;" width="200">Action </th>
+										<!-- <th style="color:black;">Action </th> -->
+
+									</tr>
+								</thead>
+								<tbody>
+									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
+									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
+									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='canceled'";
+									$query = $dbh->prepare($sql);
+									$query->execute();
+									$results = $query->fetchAll(PDO::FETCH_OBJ);
+
+									if ($query->rowCount() > 0) {
+										foreach ($results as $result) {				?>
+											<tr>
+												<td style="color:black;"><?php echo htmlentities($result->bookingId); ?></td>
+												<td style="color:black;"><?php echo htmlentities($result->fullName); ?></td>
+												<td style="color:black;" width="50">
+													<?php
+													$ptype = $result->packageType;
+
+													$sql1 = "SELECT * from tblprice where id='$ptype'";
+													$query1 = $dbh->prepare($sql1);
+													$query1->execute();
+													$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+
+													foreach ($results1 as $result1) { ?>
+														<?= $result1->service; ?> (<?= $result1->cost; ?>)
+
+													<?php }
+
+
+													?></td>
+
+
+												<td style="color:black;"><?php echo htmlentities($result->washingPointName); ?><br />
+													<?php echo htmlentities($result->washingPointAddress); ?></td>
+												<td style="color:black;"><?php echo htmlentities($result->washDate . "/" . $result->washTime); ?></td>
+
+												<td style="color:black;"><?php $st = $result->status == "New" ? "Pending": $result->status ; echo htmlentities($st); ?></td>
+
+
+                                               <td>
+											   <!-- <a href="all-bookings.php?bid=<?=$result->bookingId;?>">
+											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel"> 
+												</a> -->
+												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt"><input type="button" class="btn btn-danger" value="Delete"></a>
+											
+											</td>
+											<?php } ?>
+											</tr>
+										<?php } else { ?>
+											<tr>
+												<td colspan="6" style="color:red;">No Record found</td>
+
+											</tr>
+										<?php } ?>
+								</tbody>
+							</table>
+						</div>
+						</table>
+
+
+					</div>
+
+
 					<!-- script-for sticky-nav -->
 					<script>
 						$(document).ready(function() {
@@ -280,3 +403,32 @@ if (strlen($_SESSION['alogin']) == 0) {
 		});
 	});
 </script>
+
+
+<!--  cash model-->
+
+
+<div class="modal fade" id="myCashPayModal" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Collect Payments For #<?php echo $_GET['bookingid']; ?> By Cash</h4>
+								</div>
+								<div class="modal-body">
+									<form method="post">
+										<p>Approve payment</p>
+
+										<p><input type="submit" class="btn btn-custom" name="Approve" value="Approve"></p>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+

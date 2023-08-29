@@ -183,6 +183,7 @@ foreach($results as $result)
 								<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
 				<button type="submit" name="book" class="btn-primary btn">Add</button>
+				<button data-toggle="modal" data-target="#myPayModal" class="btn-primary btn">Collect Payments By Cash</button>
 
 				<button type="reset" class="btn-inverse btn">Reset</button>
 			</div>
@@ -201,6 +202,30 @@ foreach($results as $result)
       <div class="panel-footer">
 		
 	 </div>
+	 <div class="modal fade" id="myPayModal" role="dialog">
+						<div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Enter Mobile Number To Pay You Booking</h4>
+								</div>
+								<div class="modal-body">
+									<!-- <form method="post" action="paynow.php"> -->
+										<!-- <p><input type="hidden" class="form-control" name="request_id" value="<?= $_GET['bookingid']; ?>" required></p> -->
+										<p><input type="hidden" class="form-control" name="amount" value="<?= $price; ?>" required></p>
+										<p><input type="text" class="form-control" name="phone_number" placeholder="078" required></p>
+										<p><input type="submit" class="btn btn-custom" name="pay" value="Pay Now"></p>
+									<!-- </form> -->
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
     </form>
   </div>
  	</div>
@@ -267,3 +292,8 @@ foreach($results as $result)
 </body>
 </html>
 <?php } ?>
+
+
+<!-- pay model  -->
+
+
