@@ -129,7 +129,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 								<tbody>
 									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
 									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
-									where tblcarwashbooking.carWashPoint='$_SESSION[carwash]'";
+									where tblcarwashbooking.carWashPoint='$_SESSION[carwash]' and tblcarwashbooking.paymentStatus='payed'";
 									$query = $dbh->prepare($sql);
 									$query->execute();
 									$results = $query->fetchAll(PDO::FETCH_OBJ);

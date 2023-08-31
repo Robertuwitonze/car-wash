@@ -61,7 +61,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 									<div class="four-text">
 										<h3>Total Bookings</h3>
 
-										<?php $sql = "SELECT carWashPoint from tblcarwashbooking where carWashPoint='$_SESSION[carwash]'";
+										<?php $sql = "SELECT carWashPoint from tblcarwashbooking where carWashPoint='$_SESSION[carwash]' and paymentstatus='payed'";
 										$query = $dbh->prepare($sql);
 										$query->execute();
 										$results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -82,7 +82,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 									</div>
 									<div class="four-text">
 										<h3>New Bookings</h3>
-										<?php $sql1 = "SELECT id from tblcarwashbooking  where carWashPoint='$_SESSION[carwash]' and status='New'";
+										<?php $sql1 = "SELECT id from tblcarwashbooking  where carWashPoint='$_SESSION[carwash]' and status='New' and paymentstatus='payed'";
 										$query1 = $dbh->prepare($sql1);
 										$query1->execute();
 										$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
@@ -95,16 +95,16 @@ if (strlen($_SESSION['alogin']) == 0) {
 								</div>
 							</div>
 						</a>
-						<a href="completed-booking.php">
+						<a href="payed-bookings.php">
 							<div class="col-md-3 four-grid">
 								<div class="four-wthree">
 									<div class="icon">
 										<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
 									</div>
-									<div class="four-text">
+									<div class="one-text">
 										<h3>Completed Bookings</h3>
-										<h3>Not Payed</h3>
-										<?php $sql3 = "SELECT id from tblcarwashbooking  where  carWashPoint='$_SESSION[carwash]' and status='Completed' and paymentStatus='not payed' ";
+										<!-- <h3> Payed</h3> -->
+										<?php $sql3 = "SELECT id from tblcarwashbooking  where  carWashPoint='$_SESSION[carwash]' and status='Completed' and paymentStatus='payed' ";
 										$query3 = $dbh->prepare($sql3);
 										$query3->execute();
 										$results3 = $query3->fetchAll(PDO::FETCH_OBJ);
@@ -139,31 +139,10 @@ if (strlen($_SESSION['alogin']) == 0) {
 							</div>
 						</a>
 
-						<div class="clearfix"></div>
-					</div>
+						<!-- <div class="clearfix"></div>
+					</div> -->
 					<div class="four-grids">
-						<a href="payed-bookings.php">
-							<div class="col-md-3 four-grid">
-								<div class="four-wthree">
-									<div class="icon">
-										<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
-									</div>
-									<div class="one-text">
-										<h3>Completed Bookings</h3>
-										<h3> Payed</h3>
-										<?php $sql3 = "SELECT id from tblcarwashbooking  where  carWashPoint='$_SESSION[carwash]' and status='Completed' and paymentStatus='payed' ";
-										$query3 = $dbh->prepare($sql3);
-										$query3->execute();
-										$results3 = $query3->fetchAll(PDO::FETCH_OBJ);
-										$completedbookings = $query3->rowCount();
-										?>
-										<h4><?php echo htmlentities($completedbookings); ?></h4>
-
-									</div>
-
-								</div>
-							</div>
-						</a>
+						
 						<div class="clearfix"></div>
 					</div>
 
