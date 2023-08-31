@@ -52,13 +52,13 @@ if (isset($_POST['pay'])) {
             // $query->execute();
             echo '<script>alert("Please continue by allowing the payment on the phone. If the prompt fails to come out dial *182*7*1#");</script>';
 
-            // echo '<script>window.location="completed-booking.php";</script>';
+            echo '<script>window.location="complete-booking.php";</script>';
 
 
             exit();
         } else {
             echo '<script>alert("user number with enought money !!");</script>';
-            echo '<script>window.location="completed-booking.php";</script>';
+            echo '<script>window.location="pay-booking.php";</script>';
         }
     }
 }

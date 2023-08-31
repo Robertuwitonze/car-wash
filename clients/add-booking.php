@@ -38,7 +38,7 @@ if($lastInsertId)
 {
  
   echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bno.'")</script>';
- echo "<script>window.location.href ='new-booking.php'</script>";
+ echo "<script>window.location.href ='pay-booking.php?bookingid=$bno&package=$ptype'</script>";
 }
 else 
 {

@@ -404,31 +404,3 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 	});
 </script>
 
-
-<!--  cash model-->
-
-
-<div class="modal fade" id="myCashPayModal" role="dialog">
-						<div class="modal-dialog">
-
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Collect Payments For #<?php echo $_GET['bookingid']; ?> By Cash</h4>
-								</div>
-								<div class="modal-body">
-									<form method="post">
-										<p>Approve payment</p>
-
-										<p><input type="submit" class="btn btn-custom" name="Approve" value="Approve"></p>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								</div>
-							</div>
-
-
-						</div>
-					</div>
-
