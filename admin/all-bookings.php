@@ -149,7 +149,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 													$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
 
 													foreach ($results1 as $result1) { ?>
-														<?= $result1->service; ?> (<?= $result1->cost; ?>)
+														<?= $result1->service; ?> (<?= $result1->cost; ?> RWF)
 
 													<?php }
 

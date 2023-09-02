@@ -9,6 +9,7 @@ header('Access-Control-Allow-Headers:Access-Control-Allow-Headers, Access-Contro
  function Creat()
  {
     $inputJSON = file_get_contents('php://input');
+    var_dump($inputJSON);
     $data = json_decode($inputJSON);
 
     $transactionId = $data->transactionId;

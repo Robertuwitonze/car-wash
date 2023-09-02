@@ -104,7 +104,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 									</div>
 									<div class="four-text">
 										<h3>Active Washing Points</h3>
-										<?php $sql5 = "SELECT id from tblwashingpoints where is_active=1";
+										<?php $sql5 = "SELECT tblwashingpoints.id from tblwashingpoints,tblusers where tblwashingpoints.is_active=1 and tblusers.carwash=tblwashingpoints.id";
 										$query5 = $dbh->prepare($sql5);
 										$query5->execute();
 										$results5 = $query5->fetchAll(PDO::FETCH_OBJ);

@@ -61,7 +61,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 									<div class="four-text">
 										<h3>Total Bookings</h3>
 
-										<?php $sql = "SELECT user_id from tblcarwashbooking where user_id='$_SESSION[id]'";
+										<?php $sql = "SELECT user_id from tblcarwashbooking where user_id='$_SESSION[id]' and tblcarwashbooking.Paymentstatus='payed'";
 										$query = $dbh->prepare($sql);
 										$query->execute();
 										$results = $query->fetchAll(PDO::FETCH_OBJ);

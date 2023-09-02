@@ -7,51 +7,66 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
+	// strtoupper() 
+	// substr('abcdef', 0, 4); 
 	// Code for Booking
-// if(isset($_POST['book']))
-// {
-// $ptype=$_POST['packagetype'];
-// $wpoint=$_POST['washingpoint'];   
-// $fname=$_POST['fname'];
-// $mobile=$_POST['contactno'];
-// $date=$_POST['washdate'];
-// $time=$_POST['washtime'];
-// $message=$_POST['message'];
-// $status='New';
-// $user_id=$_SESSION['id'];
-// $bno=mt_rand(100000000, 999999999);
-// $sql="INSERT INTO tblcarwashbooking(user_id,bookingId,packageType,carWashPoint,fullName,mobileNumber,washDate,washTime,message,status) VALUES(:user_id,:bno,:ptype,:wpoint,:fname,:mobile,:date,:time,:message,:status)";
-// $query = $dbh->prepare($sql);
-// $query->bindParam(':user_id',$user_id,PDO::PARAM_STR);
-// $query->bindParam(':bno',$bno,PDO::PARAM_STR);
-// $query->bindParam(':ptype',$ptype,PDO::PARAM_STR);
-// $query->bindParam(':wpoint',$wpoint,PDO::PARAM_STR);
-// $query->bindParam(':fname',$fname,PDO::PARAM_STR);
-// $query->bindParam(':mobile',$mobile,PDO::PARAM_STR);
-// $query->bindParam(':date',$date,PDO::PARAM_STR);
-// $query->bindParam(':time',$time,PDO::PARAM_STR);
-// $query->bindParam(':message',$message,PDO::PARAM_STR);
-// $query->bindParam(':status',$status,PDO::PARAM_STR);
-// $query->execute();
-// $lastInsertId = $dbh->lastInsertId();
-// if($lastInsertId)
-// {
- 
-//   echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bno.'")</script>';
-//  echo "<script>window.location.href ='new-booking.php'</script>";
-// }
-// else 
-// {
-//  echo "<script>alert('Something went wrong. Please try again.');</script>";
-// }
+if(isset($_POST['complete']))
+{
+	$transactionId = $_POST['codes'];
+	$tId = $_GET['trans'];
+	$bookingid = $_GET['bookingid'];
 
-// }
+	$validator = 3;
+	$validatingCode = substr($tId, 13, 5); 
+
+	for($validator = 3; $validator >0; $validator --)
+	  {
+			if(strtoupper($transactionId) == strtoupper($validatingCode))
+			{
+				
+					$sql = "UPDATE  tblcarwashbooking set paymentStatus='payed' where bookingId=:bookingid";
+					$query = $dbh->prepare($sql);
+					$query->bindParam(':bookingid', $bookingid, PDO::PARAM_STR);
+					$query->execute();
+
+					$lastInsertId = $dbh->lastInsertId();
+					if($query->execute())
+					{
+					
+					echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bookingid.'")</script>';
+					echo "<script>window.location.href ='all-bookings.php'</script>";
+					break;
+					}
+					else 
+					{
+					echo "<script>alert('Something went wrong. Please try again.');</script>";
+						//sleep(10);
+				     echo "<script>window.location='complete-booking.php?trans=$tId&bookingid=$bookingid';</script>";
+
+					}
+
+			}
+			else
+			{
+				$vald = $validator - 1;
+				echo "<script>alert('Invalid Code you have $vald  times left!!');</script>";
+				// echo('validatingCode'.$validatingCode. '    '.'enteredcode' .$transactionId);
+				// echo();
+				//sleep(10);
+				echo "<script>window.location='complete-booking.php?trans=$tId&bookingid=$bookingid';</script>";
+				
+			}
+			
+	  }
+
+
+}
 
 	?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CWMS | Add Car Washing Booking</title>
+<title>CWMS | Complete Booking</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -94,7 +109,7 @@ else{
 				</div>
 <!--heder end here-->
 	<ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Pay Your Booking </li>
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Complete Booking </li>
             </ol>
 
             <div class="" id="myPayModal" role="dialog">
@@ -103,22 +118,14 @@ else{
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
-									<h4 class="modal-title">Enter First 5 charcters of the code provided in your payment confirmation message </h4>
+									<h4 class="modal-title">Enter First 5 charcters of External Transaction id provided in your payment confirmation message </h4>
+									<h3 class="modal-title">You have only 3 times for wrong code </h3>
 								</div>
 								<div class="modal-body">
-									<form method="post" action="paynow.php">
-										<p><input type="hidden" class="form-control" name="request_id" value="<?= $_GET['bookingid']; ?>" required></p>
-                                        <?php 
-                                                $sql = "SELECT cost from  tblprice where id='$_GET[package]'";
-                                                $query = $dbh->prepare($sql);
-                                                $query->execute();
-                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                foreach ($results as $result) {	
-                                    ?>
-										<p><input type="hidden" class="form-control" name="amount" value="<?= $result->cost; ?>" required></p>
-                                        <?php } ?>
-										<p><input type="text" class="form-control" name="phone_number" placeholder="078" required></p>
-										<p><input type="submit" class="btn btn-custom" name="pay" value="Pay "></p>
+									<form method="post">
+										
+										<p><input type="text"  class="form-control" name="codes" placeholder="..." required></p>
+										<p><input type="submit" class="btn btn-custom" name="complete" value="Send "></p>
 									<!-- </form> -->
 								</div>
 								<div class="modal-footer">

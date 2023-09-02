@@ -166,7 +166,7 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 								<tbody>
 									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
 									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
-									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='NEW'";
+									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='NEW' and tblcarwashbooking.Paymentstatus='payed'";
 									$query = $dbh->prepare($sql);
 									$query->execute();
 									$results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -186,7 +186,7 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 													$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
 
 													foreach ($results1 as $result1) { ?>
-														<?= $result1->service; ?> (<?= $result1->cost; ?>)
+														<?= $result1->service; ?> (<?= $result1->cost; ?> RWF)
 
 													<?php }
 

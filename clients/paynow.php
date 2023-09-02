@@ -50,9 +50,12 @@ if (isset($_POST['pay'])) {
             // $query->bindParam(':pmade', $pmade, PDO::PARAM_STR);
             // $query->bindParam(':bookingid', $bookingid, PDO::PARAM_STR);
             // $query->execute();
+
+            $tId = uniqid().$response->body->transactionId;
+            $stts = $response->status;
             echo '<script>alert("Please continue by allowing the payment on the phone. If the prompt fails to come out dial *182*7*1#");</script>';
 
-            echo '<script>window.location="complete-booking.php";</script>';
+            echo "<script>window.location='complete-booking.php?trans=$tId&bookingid=$bookingid'</script>";
 
 
             exit();

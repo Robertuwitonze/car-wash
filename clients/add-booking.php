@@ -37,7 +37,7 @@ $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
  
-  echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bno.'")</script>';
+//   echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bno.'")</script>';
  echo "<script>window.location.href ='pay-booking.php?bookingid=$bno&package=$ptype'</script>";
 }
 else 
@@ -125,7 +125,7 @@ else
 									<div class="col-sm-8">
 								<select name="washingpoint" required class="form-control">
                 <option value="">Select Washing Point</option>
-<?php $sql = "SELECT * from tblwashingpoints";
+<?php $sql = "SELECT * from tblwashingpoints,tblusers where tblusers.carwash=tblwashingpoints.id";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -182,9 +182,8 @@ foreach($results as $result)
 					
 								<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
-				<button type="submit" name="book" class="btn-primary btn">Add</button>
-				<button data-toggle="modal" data-target="#myPayModal" class="btn-primary btn">Collect Payments By Cash</button>
-
+				<button type="submit" name="book" class="btn-primary btn">Book Now</button>
+				
 				<button type="reset" class="btn-inverse btn">Reset</button>
 			</div>
 		</div>
