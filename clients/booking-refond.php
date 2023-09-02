@@ -1,64 +1,40 @@
 <?php
 session_start();
-error_reporting();
+error_reporting(0);
 include('includes/config.php');
 if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
 else{
-	// strtoupper() 
-	// substr('abcdef', 0, 4); 
 	// Code for Booking
-if(isset($_POST['complete']))
+if(isset($_POST['refond']))
 {
-	$transactionId = $_POST['codes'];
-	$tId = $_GET['trans'];
-	$bookingid = $_GET['bookingid'];
+$client = $_SESSION['id'];
+$bid=$_GET['bid'];
+$wpoint=$_GET['wp'];   
+$reason=$_POST['reason'];   
+$status='pending';
 
-	$validator = 3;
-	$validatingCode = substr($tId, 13, 5); 
-
-	for($validator = 3; $validator >0; $validator --)
-	  {
-			if(strtoupper($transactionId) == strtoupper($validatingCode))
-			{
-				
-					$sql = "UPDATE  tblcarwashbooking set paymentStatus='payed' where bookingId=:bookingid";
-					$query = $dbh->prepare($sql);
-					$query->bindParam(':bookingid', $bookingid, PDO::PARAM_STR);
-					$query->execute();
-
-					$lastInsertId = $dbh->lastInsertId();
-					if($query->execute())
-					{
-					
-					echo '<script>alert("Your booking done successfully. Booking number is "+"'.$bookingid.'")</script>';
-					echo "<script>window.location.href ='all-bookings.php'</script>";
-					break;
-					}
-					else 
-					{
-					echo "<script>alert('Something went wrong. Please try again.');</script>";
-						//sleep(10);
-				     echo "<script>window.location='complete-booking.php?trans=$tId&bookingid=$bookingid';</script>";
-
-					}
-
-			}
-			else
-			{
-				$vald = $validator - 1;
-				echo "<script>alert('Invalid Code you have $vald  times left!!');</script>";
-				// echo('validatingCode'.$validatingCode. '    '.'enteredcode' .$transactionId);
-				// echo();
-				//sleep(10);
-				echo "<script>window.location='complete-booking.php?trans=$tId&bookingid=$bookingid';</script>";
-				
-			}
-			
-	  }
-
+$sql="INSERT INTO refonds(clientId,carWashingPointId,refondReason,bookingId,status) VALUES(:client,:wpoint,:reason,:bid,:status)";
+$query = $dbh->prepare($sql);
+$query->bindParam(':client',$client,PDO::PARAM_STR);
+$query->bindParam(':wpoint',$wpoint,PDO::PARAM_STR);
+$query->bindParam(':reason',$reason,PDO::PARAM_STR);
+$query->bindParam(':bid',$bid,PDO::PARAM_STR);
+$query->bindParam(':status',$status,PDO::PARAM_STR);
+$query->execute();
+$lastInsertId = $dbh->lastInsertId();
+if($lastInsertId)
+{
+ 
+  echo '<script>alert(" Request sent successfully")</script>';
+ echo "<script>window.location.href ='all-bookings.php'</script>";
+}
+else 
+{
+ echo "<script>alert('Something went wrong. Please try again.');</script>";
+}
 
 }
 
@@ -66,7 +42,7 @@ if(isset($_POST['complete']))
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>CWMS | Complete Booking</title>
+<title>CWMS |  Booking Refond</title>
 
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
@@ -109,35 +85,52 @@ if(isset($_POST['complete']))
 				</div>
 <!--heder end here-->
 	<ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Complete Booking </li>
+                <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Request For Refond</li>
             </ol>
+		<!--grid-->
+ 	<div class="grid-form">
+ 
+<!---->
+  <div class="grid-form1">
+  	       <h3>Request For Refond</h3>
 
-            <div class="" id="myPayModal" role="dialog">
-						<div class="modal-dialog">
-
-							<!-- Modal content-->
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title">Enter First 5 charcters of External Transaction id provided in your payment confirmation message </h4>
-									<h3 class="modal-title">You have only 3 times for wrong code </h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" name="washingpoint" method="post" enctype="multipart/form-data">
+								
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">Reason (if any)</label>
+									<div class="col-sm-8">
+								<textarea name="reason"  class="form-control" placeholder="Reason if any"></textarea>
+									</div>
 								</div>
-								<div class="modal-body">
-									<form method="post">
-										
-										<p><input type="text" maxlength="5" class="form-control" name="codes" placeholder="..." required></p>
-										<p><input type="submit" class="btn btn-custom" name="complete" value="Send "></p>
-									<!-- </form> -->
-								</div>
-								<div class="modal-footer">
-									<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
-								</div>
-							</div>
-
-
-						</div>
+														
+	
+								<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<button type="submit" name="refond" class="btn-primary btn">Request Now</button>
+				
+				<button type="reset" class="btn-inverse btn">Reset</button>
+			</div>
+		</div>
+						
+						
+						
 					</div>
-    </form>
-  </div>
+					
+					</form>
+
+     
+      
+
+      
+      <div class="panel-footer">
+		
+	 </div>
+	
+ 	</div>
+ 	<!--//grid-->
+
 <!-- script-for sticky-nav -->
 		<script>
 		$(document).ready(function() {

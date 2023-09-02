@@ -9,6 +9,25 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 if(!empty($_GET['bid']) && $_GET['action'] == 'cancel')
 {
+	$confirm;
+	?>
+
+	<script>
+	  
+		if (confirm("If you cancle this booking there is no way to restore it except making new one, are you sure to cancle ?")) 
+		{
+			<?php $confirm = 1;?>
+		 
+		} else 
+		{
+		 <?php $confirm = 0;?>
+		}
+
+	</script>
+
+	<?php
+	if($confirm == 1)
+	{
 
 	$sql = "UPDATE tblcarwashbooking SET status = 'canceled' where user_id='$_SESSION[id]' and bookingId='$_GET[bid]'";
 	$query = $dbh->prepare($sql);
@@ -22,6 +41,13 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'cancel')
 	{
 		// pass
 		echo "<script>alert('something went wrong, try again!');</script>";
+	}
+	}
+	else
+	{
+		// pass
+				echo "<script type='text/javascript'> document.location = 'all-bookings.php'; </script>";
+
 	}	
 	
 }
@@ -288,7 +314,9 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 											   <!-- <a href="all-bookings.php?bid=<?=$result->bookingId;?>">
 											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel"> 
 												</a> -->
-												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt"><input type="button" class="btn btn-danger" value="Delete"></a>
+												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt" ><input type="button" class="btn btn-danger" value="Delete"></a>
+												<br><br>
+												<a href="booking-refond.php?bid=<?=$result->bookingId;?>&wp=<?=$result->carWashPoint;?>"><input type="button" class="btn btn-primary" value="Refund"></a>
 											
 											</td>
 											<?php } ?>

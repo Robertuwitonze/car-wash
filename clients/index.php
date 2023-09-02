@@ -12,7 +12,7 @@ if (isset($_POST['login'])) {
 	$results = $query->fetchAll(PDO::FETCH_OBJ);
 	if ($query->rowCount() > 0) {
 		foreach ($results as $result) {
-			$_SESSION['alogin'] = $result->names;
+			$_SESSION['alogin'] = $result->username;
 			$_SESSION['id'] = $result->id;
 			$_SESSION['username'] = $result->username;
 		}
