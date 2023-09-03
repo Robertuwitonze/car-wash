@@ -30,7 +30,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <html>
 
     <head>
-        <title>Payed Bookings</title>
+        <title>Completed Bookings</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script type="application/x-javascript">
@@ -116,14 +116,14 @@ if (strlen($_SESSION['alogin']) == 0) {
                 </div>
                 <!--heder end here-->
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Manage Payed Bookings</li>
+                    <li class="breadcrumb-item"><a href="dashboard.php">Home</a><i class="fa fa-angle-right"></i>Manage Completed Bookings</li>
                 </ol>
                 <div class="agile-grids">
                     <!-- tables -->
 
                     <div class="agile-tables">
                         <div class="w3l-table-info">
-                            <h2>Payed Bookings</h2>
+                            <h2>Completed Bookings</h2>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>

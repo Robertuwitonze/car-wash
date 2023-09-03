@@ -9,27 +9,8 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 if(!empty($_GET['bid']) && $_GET['action'] == 'cancel')
 {
-	$confirm;
-	?>
 
-	<script>
-	  
-		if (confirm("If you cancle this booking there is no way to restore it except making new one, are you sure to cancle ?")) 
-		{
-			<?php $confirm = 1;?>
-		 
-		} else 
-		{
-		 <?php $confirm = 0;?>
-		}
-
-	</script>
-
-	<?php
-	if($confirm == 1)
-	{
-
-	$sql = "UPDATE tblcarwashbooking SET status = 'canceled' where user_id='$_SESSION[id]' and bookingId='$_GET[bid]'";
+	$sql = "UPDATE tblcarwashbooking SET status = 'cancled' where user_id='$_SESSION[id]' and bookingId='$_GET[bid]'";
 	$query = $dbh->prepare($sql);
 	if($query->execute())
 	{
@@ -42,13 +23,7 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'cancel')
 		// pass
 		echo "<script>alert('something went wrong, try again!');</script>";
 	}
-	}
-	else
-	{
-		// pass
-				echo "<script type='text/javascript'> document.location = 'all-bookings.php'; </script>";
-
-	}	
+		
 	
 }
 // delete
@@ -192,7 +167,7 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 								<tbody>
 									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
 									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
-									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='NEW' and tblcarwashbooking.Paymentstatus='payed'";
+									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status !='cancled' and tblcarwashbooking.Paymentstatus='payed'";
 									$query = $dbh->prepare($sql);
 									$query->execute();
 									$results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -229,7 +204,7 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 
                                                <td>
 											   <a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=cancel">
-											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel"> 
+											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel" onclick="return confirm('If you cancle this booking there is no way to restore it except making new one, are you sure to cancle ?')"> 
 												</a>
 												<!-- <a href="edit-booking.php?bid=<?=$result->bookingId;?>&action=cancel"><input type="button" class="btn btn-primary" value="Edit"></a> -->
 											
@@ -266,7 +241,6 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 										<th style="color:black;" width="200">Pacakge Type</th>
 										<th style="color:black;">Washing Point </th>
 										<th style="color:black;">Washing Date/Time </th>
-										<th style="color:black;" width="200">Status </th>
 										<th style="color:black;" width="200">Action </th>
 										<!-- <th style="color:black;">Action </th> -->
 
@@ -275,13 +249,15 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 								<tbody>
 									<?php $sql = "SELECT *,tblcarwashbooking.id as bid from tblcarwashbooking 
 									join tblwashingpoints on tblwashingpoints.id=tblcarwashbooking.carWashPoint 
-									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='canceled'";
+									where tblcarwashbooking.user_id='$_SESSION[id]' and tblcarwashbooking.status='cancled'";
 									$query = $dbh->prepare($sql);
 									$query->execute();
 									$results = $query->fetchAll(PDO::FETCH_OBJ);
 
 									if ($query->rowCount() > 0) {
-										foreach ($results as $result) {				?>
+										foreach ($results as $result) {		
+											$currentId = $result->bookingId;
+											?>
 											<tr>
 												<td style="color:black;"><?php echo htmlentities($result->bookingId); ?></td>
 												<td style="color:black;"><?php echo htmlentities($result->fullName); ?></td>
@@ -307,16 +283,44 @@ if(!empty($_GET['bid']) && $_GET['action'] == 'dlt')
 													<?php echo htmlentities($result->washingPointAddress); ?></td>
 												<td style="color:black;"><?php echo htmlentities($result->washDate . "/" . $result->washTime); ?></td>
 
-												<td style="color:black;"><?php $st = $result->status == "New" ? "Pending": $result->status ; echo htmlentities($st); ?></td>
 
 
                                                <td>
 											   <!-- <a href="all-bookings.php?bid=<?=$result->bookingId;?>">
 											      <input type="button" name="cancel" class="btn btn-danger" value="Cancel"> 
 												</a> -->
-												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt" ><input type="button" class="btn btn-danger" value="Delete"></a>
 												<br><br>
-												<a href="booking-refond.php?bid=<?=$result->bookingId;?>&wp=<?=$result->carWashPoint;?>"><input type="button" class="btn btn-primary" value="Refund"></a>
+												<?php
+												$bkid = $result->bookingId;
+													$sql2 = "SELECT * from refonds where clientId='$_SESSION[id]' and bookingid='$bkid'";
+													$query2 = $dbh->prepare($sql2);
+													$query2->execute();
+													$results2 = $query2->fetchAll(PDO::FETCH_OBJ);
+													if ($query2->rowCount() > 0) {
+													foreach ($results2 as $result2) {	
+												?>
+																						
+												<?php if ($result2->status == 'pending') {
+												?>
+												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt" ><input type="hidden" class="btn btn-danger" value="Delete"></a>
+
+												<?php } else { ?>
+
+												<a href="all-bookings.php?bid=<?=$result->bookingId;?>&action=dlt" ><input type="button" class="btn btn-danger" value="Delete"></a>
+
+												<?php } ?>
+											
+									<?php } }
+									else{
+										?>
+											<a href="booking-refond.php?bid=<?=$result->bookingId;?>&wp=<?=$result->carWashPoint;?>">
+											  <input type="button" class="btn btn-primary" value="request Refund" >
+											</a>
+
+										<?php
+										
+									}
+									?>
 											
 											</td>
 											<?php } ?>

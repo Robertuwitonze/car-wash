@@ -139,11 +139,37 @@ if (strlen($_SESSION['alogin']) == 0) {
 							</div>
 						</a>
 
-						<!-- <div class="clearfix"></div>
-					</div> -->
+						<div class="clearfix">
+							
+						</div>
+						
+					</div>
+					<a href="manage-refonds.php">
+							<div class="col-md-3 four-grid">
+								<div class="four-agileinfo">
+									<div class="icon">
+										<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+									</div>
+									<div class="four-text">
+										<h3>New Refonds Requests</h3>
+										<?php 
+										$sql1 = "SELECT id from refonds  where status='pending' and carWashingPointId='$_SESSION[carwash]'";
+										$query1 = $dbh->prepare($sql1);
+										$query1->execute();
+										$results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+										$newbookings = $query1->rowCount();
+										?>
+										<h4 style="color: white;"><?php echo htmlentities($newbookings); ?></h4>
+
+									</div>
+
+								</div>
+							</div>
+						</a>
 					<div class="four-grids">
 						
 						<div class="clearfix"></div>
+						
 					</div>
 
 

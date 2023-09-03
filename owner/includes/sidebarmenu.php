@@ -29,6 +29,15 @@
 				</ul>
 			</li>
 
+			<li id="menu-academico"><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span>Services</span> <span class="fa fa-angle-right" style="float: right"></span>
+					<div class="clearfix"></div>
+				</a>
+				<ul id="menu-academico-sub">
+					<li id="menu-academico-avaliacoes"><a href="add-service.php">Add Service</a></li>
+					<li id="menu-academico-avaliacoes"><a href="manage-service.php">Manage Service</a></li>
+				</ul>
+			</li>
+
 
 
 

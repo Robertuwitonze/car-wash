@@ -118,6 +118,29 @@ if (strlen($_SESSION['alogin']) == 0) {
 							</div>
 						</a>
 
+							<a href="manage-service.php">
+							<div class="col-md-3 four-grid">
+								<div class="four-agileits">
+									<div class="icon">
+										<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+									</div>
+									<div class="four-text">
+										<h3>Services</h3>
+
+										<?php $sql = "SELECT * from tblprice where is_active=1";
+										$query = $dbh->prepare($sql);
+										$query->execute();
+										$results = $query->fetchAll(PDO::FETCH_OBJ);
+										$cnt = $query->rowCount();
+										?> <h4> <?php echo htmlentities($cnt); ?> </h4>
+
+
+									</div>
+
+								</div>
+							</div>
+						</a>
+
 					</div>
 
 					<div class="four-grids">
